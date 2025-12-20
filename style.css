@@ -65,3 +65,8 @@ body {
 .main-form button:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
 }
+
+.content {
+  text-align: center;
+  margin-top: 10px;
+}
