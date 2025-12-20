@@ -38,16 +38,18 @@ body {
   display: flex;
   justify-content: left;
   align-items: stretch;
-  margin-left: 20px;
-  gap: 10px;
+  gap: 20px;
 }
 
 .main-form input[type="text"] {
   width: 80%;
   padding: 5px;
+  margin-left: 20px;
   font-size: 1.2rem;
   box-sizing: border-box;
+  border-radius: 20px;
   border: 1px solid #ccc;
+  text-align: center;
 }
 
 .main-form button {
@@ -57,7 +59,7 @@ body {
   background-position: center;
   background-size: cover;
   border: none;
-  border-radius: 10px;
+  border-radius: 20px;
   cursor: pointer;
   margin-right: 5px;
   transition: all 0.3s ease;
@@ -74,41 +76,36 @@ body {
 .content-item {
   display: flex;
   align-items: center;
-  gap: 30px;
-  padding: 5px;
   font-weight: 500;
   width: 100%;
+  margin-top: 15px;
 }
 
 .content-item span {
   font-weight: 500;
-}
-
-.content-item::before {
-  content: "";
-  flex: 0 0 20px;
-  height: 20px;
-  margin-left: 10px;
-  background-image: url(img/notselected.png);
-  background-position: center;
-  background-size: cover;
-  cursor: pointer;
-}
-
-.content-item span {
   flex: 1;
+  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.content-item::after {
-  content: "";
+.icon {
+  border: none;
   flex: 0 0 20px;
   height: 20px;
-  margin-right: 10px;
-  background-image: url(img/trash.png);
-  background-position: center;
+  background-color: white;
   background-size: cover;
-  cursor: pointer;
+  background-position: center;
+  height: 20px;
+}
+
+.selectIcon {
+  background-image: url(img/notselected.png);
+  margin-left: 15px;
+}
+
+.trashIcon {
+  background-image: url(img/trash.png);
+  margin-right: 15px;
 }
