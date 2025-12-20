@@ -5,7 +5,10 @@ function addNewEntry() {
     return;
   }
   const newDiv = document.createElement("div");
-  newDiv.textContent = newEntry.value;
+  newDiv.className = "content-item";
+  const newSpan = document.createElement("span");
+  newSpan.textContent = newEntry.value;
+  newDiv.appendChild(newSpan);
   container.appendChild(newDiv);
   newEntry.value = "";
 }

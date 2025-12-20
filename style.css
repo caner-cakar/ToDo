@@ -70,3 +70,45 @@ body {
   text-align: center;
   margin-top: 10px;
 }
+
+.content-item {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 5px;
+  font-weight: 500;
+  width: 100%;
+}
+
+.content-item span {
+  font-weight: 500;
+}
+
+.content-item::before {
+  content: "";
+  flex: 0 0 20px;
+  height: 20px;
+  margin-left: 10px;
+  background-image: url(img/notselected.png);
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.content-item span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.content-item::after {
+  content: "";
+  flex: 0 0 20px;
+  height: 20px;
+  margin-right: 10px;
+  background-image: url(img/trash.png);
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
