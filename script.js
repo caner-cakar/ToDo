@@ -1,10 +1,6 @@
-function addNewEntry() {
+function renderTask(value) {
   const container = document.getElementById("allContent");
-  const newEntry = document.getElementById("entry");
-  const text = newEntry.value.trim();
-  if (!text) {
-    return;
-  }
+
   const newDiv = document.createElement("div");
   newDiv.className = "content-item";
 
@@ -12,7 +8,7 @@ function addNewEntry() {
   selectIcon.className = "icon selectIcon";
 
   const newSpan = document.createElement("span");
-  newSpan.textContent = text;
+  newSpan.textContent = value;
 
   const trashIcon = document.createElement("button");
   trashIcon.className = "icon trashIcon";
@@ -30,14 +26,16 @@ function addNewEntry() {
   trashIcon.onclick = function () {
     newDiv.remove();
   };
-
   newDiv.append(selectIcon, newSpan, trashIcon);
   container.appendChild(newDiv);
-  newEntry.value = "";
-  newEntry.focus();
 }
 
-function checkContentSize()
-{
-  const container = document.getElementById("allContent");
+function addNewEntry() {
+  const input = document.getElementById("entry");
+  const text = input.value.trim();
+  if (text) {
+    renderTask(text);
+    input.value = "";
+    input.focus();
+  }
 }
