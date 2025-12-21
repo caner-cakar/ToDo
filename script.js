@@ -1,41 +1,65 @@
+const storage = {
+  get: () => JSON.parse(localStorage.getItem("tasks")) || [],
+  set: (data) => localStorage.setItem("tasks", JSON.stringify(data)),
+};
+
+window.onload = getDataFromJson;
+
 function renderTask(value) {
   const container = document.getElementById("allContent");
-
   const newDiv = document.createElement("div");
   newDiv.className = "content-item";
 
-  const selectIcon = document.createElement("button");
-  selectIcon.className = "icon selectIcon";
+  newDiv.innerHTML = `
+    <button class="icon selectIcon" style="background-image: url('img/${
+      value.lineT ? "checked" : "notselected"
+    }.png')"></button>
+    <span style="text-decoration: ${value.lineT ? "line-through" : "none"}">${
+    value.text
+  }</span>
+    <button class="icon trashIcon"></button>
+  `;
 
-  const newSpan = document.createElement("span");
-  newSpan.textContent = value;
+  const [selectIcon, newSpan, trashIcon] = newDiv.children;
 
-  const trashIcon = document.createElement("button");
-  trashIcon.className = "icon trashIcon";
-
-  selectIcon.onclick = function () {
-    if (this.style.backgroundImage.includes("checked.png")) {
-      this.style.backgroundImage = "url('img/notselected.png')";
-      newSpan.style.textDecoration = "none";
-    } else {
-      this.style.backgroundImage = "url('img/checked.png')";
-      newSpan.style.textDecoration = "line-through";
-    }
+  selectIcon.onclick = () => {
+    value.lineT = !value.lineT;
+    selectIcon.style.backgroundImage = `url('img/${
+      value.lineT ? "checked" : "notselected"
+    }.png')`;
+    newSpan.style.textDecoration = value.lineT ? "line-through" : "none";
+    updateStorage(value);
   };
 
-  trashIcon.onclick = function () {
+  trashIcon.onclick = () => {
     newDiv.remove();
+    const tasks = storage.get().filter((t) => t.text !== value.text);
+    storage.set(tasks);
   };
-  newDiv.append(selectIcon, newSpan, trashIcon);
+
   container.appendChild(newDiv);
 }
 
 function addNewEntry() {
   const input = document.getElementById("entry");
-  const text = input.value.trim();
-  if (text) {
-    renderTask(text);
-    input.value = "";
-    input.focus();
-  }
+  const val = input.value.trim();
+  if (!val) return;
+
+  const newTask = { text: val, lineT: false };
+  renderTask(newTask);
+  storage.set([...storage.get(), newTask]);
+
+  input.value = "";
+  input.focus();
+}
+
+function getDataFromJson() {
+  storage.get().forEach(renderTask);
+}
+
+function updateStorage(updatedTask) {
+  const tasks = storage
+    .get()
+    .map((t) => (t.text === updatedTask.text ? updatedTask : t));
+  storage.set(tasks);
 }
