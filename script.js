@@ -36,3 +36,8 @@ function addNewEntry() {
   newEntry.value = "";
   newEntry.focus();
 }
+
+function checkContentSize()
+{
+  const container = document.getElementById("allContent");
+}
