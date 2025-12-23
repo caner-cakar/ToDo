@@ -3,7 +3,19 @@ const storage = {
   set: (data) => localStorage.setItem("tasks", JSON.stringify(data)),
 };
 
-window.onload = getDataFromJson;
+window.addEventListener("load", () => {
+  getDataFromJson();
+
+  const input = document.getElementById("entry");
+  if (!input) return;
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addNewEntry();
+    }
+  });
+});
 
 function renderTask(value) {
   const container = document.getElementById("allContent");
@@ -14,9 +26,9 @@ function renderTask(value) {
     <button class="icon selectIcon" style="background-image: url('img/${
       value.lineT ? "checked" : "notselected"
     }.png')"></button>
-    <span style="text-decoration: ${value.lineT ? "line-through" : "none"}">${
-    value.text
-  }</span>
+    <span style="text-decoration: ${value.lineT ? "line-through" : "none"}">
+      ${value.text}
+    </span>
     <button class="icon trashIcon"></button>
   `;
 
